@@ -1,3 +1,5 @@
 module.exports = {
-  reactStrictMode: true,
+  images: {
+    domains: ['upload.wikimedia.org','api.qrserver.com',""],
+  },
 }
