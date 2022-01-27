@@ -61,7 +61,7 @@ export default function Home() {
       <p className=" center font-Mitr mt-9 text-base md:text-2xl">Enter Text</p>
       <div className=" center mt-2">
         <textarea
-          className="border-blue-500 border-2 font-prompt rounded-md w-[320px] h-[100px] md:w-[500px] md:h-[150px] px-3 text-left align-text-top"
+          className="border-blue-500 border-2 font-Prompt rounded-md w-[320px] h-[100px] md:w-[500px] md:h-[150px] px-3 text-left align-text-top"
           onChange={onInputChange}
           value={text}
           cols="30"
