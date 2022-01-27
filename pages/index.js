@@ -49,18 +49,8 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Mitr&family=Pacifico&family=Prompt&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css"
-          integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM="
-          crossorigin="anonymous"
-        ></link>
+        <title>Code-Message</title>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div>
