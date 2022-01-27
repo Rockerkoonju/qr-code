@@ -2,12 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer components {
+
+  .center{
+    @apply flex justify-center items-center
+  }
+
+  .button {
+    @apply px-4 py-2 font-Mitr tracking-wide rounded-md shadow-sm duration-500 transition md:text-2xl
+  }
+
+  .button--success {
+    @apply bg-green-500 hover:bg-green-300 text-[#f9f9f9] active:bg-white focus:outline-none focus:ring focus:ring-white
+  }
+
+
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: antiquewhite;
 }
 
 a {

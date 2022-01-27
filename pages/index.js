@@ -1,35 +1,89 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { useState } from 'react';
-import Qrcode from '../components/Qrcode';
+import Head from "next/head";
+import Image from "next/image";
+import { useState } from "react";
+import Qrcode from "../components/Qrcode";
 
 export default function Home() {
   const [text, setText] = useState("");
   const [alt, setAlt] = useState("");
-  const [image, setImage] = useState("about:blank");
-  const [loading, setLoading] = useState("");
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState();
 
   const onInputChange = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    
+
     setText(e.target.value);
-  }
+  };
 
   const imageChange = () => {
-    setImage(`https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&qzone=2&data=${text}`)
-    console.log(image)
-    setAlt(text)
-    setText('')
-  }
+    setImage(
+      `https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&qzone=2&data=${text}`
+    );
+    setAlt(text);
+    setText("");
+  };
+
+  const checkData = (image, alt) => {
+    if (!image || !alt) {
+      return <></>;
+    } else {
+      return (
+        <>
+          <div className="center">
+            <Qrcode className=" rounded-2xl" src={image} alt={alt} />
+          </div>
+          <div className="center">
+            <span className="md:hidden block center text-slate-700 font-Prompt mt-4 ">
+            **กดค้างที่รูป และกดบันทึกรูปภาพ**
+          </span>
+          <span className="hidden md:block center text-slate-700 font-Prompt mt-4 ">
+            **คลิกขวาที่รูป และกดบันทึกรูปภาพเป็น**
+          </span>
+          </div>
+          
+        </>
+      );
+    }
+  };
 
   return (
     <div>
-      <input className=' border-slate-500 border-2 rounded-md' type="text" onChange={onInputChange} value={text}/>
-      <button onClick={imageChange}>Click</button>
-      <Qrcode src={image} alt={alt}/>
-      <a id='download' download href={image}>Download</a>
-      
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Mitr&family=Pacifico&family=Prompt&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css"
+          integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM="
+          crossorigin="anonymous"
+        ></link>
+      </Head>
+
+      <div>
+        <h1 className=" font-Pacifico  center mt-10 text-4xl md:text-7xl text-[#FFADF0] drop-shadow-lg">
+          Code-Message
+        </h1>
+      </div>
+      <p className=" center font-Mitr mt-9 text-base md:text-2xl">Enter Text</p>
+      <div className=" center mt-2">
+        <textarea
+          className="border-blue-500 border-2 rounded-md w-[320px] h-[100px] md:w-[500px] md:h-[150px] px-3 text-left align-text-top"
+          onChange={onInputChange}
+          value={text}
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+      <div className="center mt-6">
+        <button className="button button--success" onClick={imageChange}>
+          Create Qr
+        </button>
+      </div>
+      <div className=" mt-4">{checkData(image, alt)}</div>
     </div>
-  )
+  );
 }
