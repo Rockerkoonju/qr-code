@@ -1,48 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import Qrcode from "../components/Qrcode";
+import Qr from "../components/Qr";
+import AES from "../components/AES";
+import Binary from "../components/Binary";
 
 export default function Home() {
-  const [text, setText] = useState("");
-  const [alt, setAlt] = useState("");
-  const [image, setImage] = useState("");
-  const [loading, setLoading] = useState();
+  const [menu, setMenu] = useState("Qr");
 
-  const onInputChange = (e) => {
-    e.preventDefault();
+  console.log(menu);
 
-    setText(e.target.value);
-  };
-
-  const imageChange = () => {
-    setImage(
-      `https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&qzone=2&data=${text}`
-    );
-    setAlt(text);
-    setText("");
-  };
-
-  const checkData = (image, alt) => {
-    if (!image || !alt) {
-      return <></>;
-    } else {
-      return (
-        <>
-          <div className="center">
-            <Qrcode className=" rounded-2xl" src={image} alt={alt} />
-          </div>
-          <div className="center">
-            <span className="md:hidden block center text-slate-700 font-Prompt mt-4 ">
-            **กดค้างที่รูป และกดบันทึกรูปภาพ**
-          </span>
-          <span className="hidden md:block center text-slate-700 font-Prompt mt-4 ">
-            **คลิกขวาที่รูป และกดบันทึกรูปภาพเป็น**
-          </span>
-          </div>
-          
-        </>
-      );
+  const CheckMenu = ({ menu }) => {
+    if (menu == "AES") {
+      return <AES />;
+    } else if (menu == "Qr") {
+      return <Qr />;
+    } else if (menu == "Binary") {
+      return <Binary />;
     }
   };
 
@@ -53,27 +27,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/* Desktop  */}
+      <div className=" inset-y-0 absolute bg-white shadow-lg h-screen md:block hidden w-28">
+        <div>
+          <button onClick={() => setMenu("AES")}>AES</button>
+          <hr />
+          <button onClick={() => setMenu("Qr")}>Qr</button>
+          <hr />
+          <button onClick={() => setMenu("Binary")}>Binary</button>
+          <hr />
+        </div>
+      </div>
+
       <div>
-        <h1 className=" font-Pacifico  center mt-10 text-4xl md:text-7xl text-[#FFADF0] drop-shadow-lg">
+        <h1 className=" font-Pacifico mb-9 center mt-10 text-4xl md:text-7xl text-[#FFADF0] drop-shadow-lg">
           Code-Message
         </h1>
       </div>
-      <p className=" center font-Mitr mt-9 text-base md:text-2xl">Enter Text</p>
-      <div className=" center mt-2">
-        <textarea
-          className="border-blue-500 border-2 font-Prompt rounded-md w-[320px] h-[100px] md:w-[500px] md:h-[150px] px-3 text-left align-text-top"
-          onChange={onInputChange}
-          value={text}
-          cols="30"
-          rows="10"
-        ></textarea>
-      </div>
-      <div className="center mt-6">
-        <button className="button button--success" onClick={imageChange}>
-          Create Qr
-        </button>
-      </div>
-      <div className=" mt-4">{checkData(image, alt)}</div>
+
+      <CheckMenu menu={menu} />
     </div>
   );
 }
